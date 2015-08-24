@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1a6b3e4-fa83-4d52-8e26-e2145162ce4e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jjoBot.py" afterPath="$PROJECT_DIR$/jjoBot.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Readme" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JJOBot.iws" />
@@ -31,11 +31,21 @@
       <file leaf-file-name="jjoBot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jjoBot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.31772575">
-              <caret line="191" column="18" selection-start-line="191" selection-start-column="18" selection-end-line="191" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.033444814">
+              <caret line="181" column="21" selection-start-line="181" selection-start-column="21" selection-end-line="181" selection-end-column="21" />
               <folding>
                 <element signature="e#47#61#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Readme" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Readme">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -54,6 +64,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/jjoBot.py" />
+        <option value="$PROJECT_DIR$/Readme" />
       </list>
     </option>
   </component>
@@ -368,7 +379,13 @@
       <option name="project" value="LOCAL" />
       <updated>1440412793749</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="First Version">
+      <created>1440416147051</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1440416147051</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -411,7 +428,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add Menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Menu" />
+    <MESSAGE value="First Version" />
+    <option name="LAST_COMMIT_MESSAGE" value="First Version" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -478,10 +496,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Readme">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/jjoBot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31772575">
-          <caret line="191" column="18" selection-start-line="191" selection-start-column="18" selection-end-line="191" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.033444814">
+          <caret line="181" column="21" selection-start-line="181" selection-start-column="21" selection-end-line="181" selection-end-column="21" />
           <folding>
             <element signature="e#47#61#0" expanded="true" />
           </folding>
