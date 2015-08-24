@@ -123,7 +123,7 @@ def getLastFromService(cid,serviceCode):
     for r in content:
         data = r
         url = data['Url'].replace("jamejamonline","jjo")
-        url = data['Url'].replace("www.jamejamonline","jjo")
+        url = url.replace("www.jamejamonline","jjo")
         bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
 
 def lnews(cid):
@@ -132,7 +132,7 @@ def lnews(cid):
     for r in content:
         data = r
         url = data['Url'].replace("jamejamonline","jjo")
-        url = data['Url'].replace("www.jamejamonline","jjo")
+        url = url.replace("www.jamejamonline","jjo")
         bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
 
 def inews(cid):
@@ -140,7 +140,7 @@ def inews(cid):
     for r in content:
         data = r
         url = data['Url'].replace("jamejamonline","jjo")
-        url = data['Url'].replace("www.jamejamonline","jjo")
+        url = url.replace("www.jamejamonline","jjo")
         bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
 
 def showSubmenu(cid):
