@@ -19,7 +19,7 @@ commands = {
 serviceIp = "10.0.9.151"
 
 getLast = "http://" + serviceIp + "/DoCommand.aspx?fn=getLast&Code=@code&top=5&nf=28"
-getImportant = "http://"+serviceIp+"/DoCommand.aspx?fn=getPopular"
+getImportant = "http://"+ serviceIp +"/DoCommand.aspx?fn=getPopular"
 search = "http://" + serviceIp + "/DoCommand.aspx?fn=search&Code=@code&top=5&nf=28&query="
 inews = "http://" + serviceIp + "/DoCommand.aspx?fn=search&Code=@code&top=5&nf=28"
 lnews = "http://" + serviceIp + "/DoCommand.aspx?fn=search&Code=@code&top=5&nf=28"
@@ -163,8 +163,6 @@ def msg_menuSelect(m):
         elif menuCode=="serviceTablepackage":
             showSubmenu(cid)
 
-
-
 @bot.message_handler(commands=['help'])
 def command_help(m):
     cid = m.chat.id
@@ -198,50 +196,13 @@ def command_important_news(m):
         bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'])
 
 
-def _decode_list(data):
-    rv = []
-    for item in data:
-        if isinstance(item, list):
-            item = _decode_list(item)
-        elif isinstance(item, dict):
-            item = _decode_dict(item)
-        else:
-            item = item.encode('utf-8')
-        rv.append(item)
-    return rv
-
-
-def _decode_dict(data):
-    rv = {}
-    for key, value in data.iteritems():
-        key = key.encode('utf-8')
-        if isinstance(value, list):
-            value = _decode_list(value)
-        elif isinstance(value, dict):
-            value = _decode_dict(value)
-        else:
-            value = value.encode('utf-8')
-        rv[key] = value
-    return rv
-
-@bot.message_handler(func=lambda message: message.text == "hi")
-def command_textHi(m):
-    bot.send_message(m.chat.id, "سلام به دوست خوبم")
-
-
-@bot.message_handler(func=lambda message: message.text == True)
-def command_textHi(m):
-    print(m.text)
-    bot.send_message(m.chat.id, "سلام به دوست خوبم")
-
-
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def command_default(m):
     bot.send_message(m.chat.id,
-                     "Iدستور وارد شده صحیح نمی باشد برای راهنمایی  از این دستور ا ستفاده کنید \r\n /help")  #this is the standard reply to a normal message
+                     "Iدستور وارد شده صحیح نمی باشد برای راهنمایی  از این دستور ا ستفاده کنید \r\n /help")
 
 
-while True:  # Don't let the main Thread end.
+while True:
     try:
         time.sleep(1)
     except KeyboardInterrupt:
