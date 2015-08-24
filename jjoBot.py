@@ -122,8 +122,8 @@ def getLastFromService(cid,serviceCode):
     content = requests.get(url).json()
     for r in content:
         data = r
-        url = data['Url'].replace("jamejamonline","jjo")
-        url = url.replace("www.jamejamonline","jjo")
+        url = data['Url'].replace("www.jamejamonline","jjo")
+        url = url.replace("jamejamonline","jjo")
         bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
 
 def lnews(cid):
@@ -131,16 +131,16 @@ def lnews(cid):
     content = requests.get(url).json()
     for r in content:
         data = r
-        url = data['Url'].replace("jamejamonline","jjo")
-        url = url.replace("www.jamejamonline","jjo")
+        url = data['Url'].replace("www.jamejamonline","jjo")
+        url = url.replace("jamejamonline","jjo")
         bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
 
 def inews(cid):
     content = requests.get(getImportant).json()
     for r in content:
         data = r
-        url = data['Url'].replace("jamejamonline","jjo")
-        url = url.replace("www.jamejamonline","jjo")
+        url = data['Url'].replace("www.jamejamonline","jjo")
+        url = url.replace("jamejamonline","jjo")
         bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
 
 def showSubmenu(cid):
