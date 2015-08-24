@@ -69,7 +69,6 @@ def listener(messages):
         cid = m.chat.id
         print(m)
         if m.content_type == 'text':
-            # print(str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text)
             print("[" + str(m.chat.id) + "]: " + m.text)
 
 
@@ -123,20 +122,23 @@ def getLastFromService(cid,serviceCode):
     content = requests.get(url).json()
     for r in content:
         data = r
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'],disable_web_page_preview=True)
+        url = data['Url'].replace("jamejamonline","jjo")
+        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
 
 def lnews(cid):
     url = getLast.replace("@code","-1")
     content = requests.get(url).json()
     for r in content:
         data = r
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'],disable_web_page_preview=True)
+        url = data['Url'].replace("jamejamonline","jjo")
+        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
 
 def inews(cid):
     content = requests.get(getImportant).json()
     for r in content:
         data = r
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'],disable_web_page_preview=True)
+        url = data['Url'].replace("jamejamonline","jjo")
+        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
 
 def showSubmenu(cid):
     bot.send_message(cid, "لطفا سرویس مورد نظر خود را انتخاب نمایید", reply_markup=subMenuSelect)  #show the keyboard
