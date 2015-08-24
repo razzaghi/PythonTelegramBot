@@ -188,25 +188,14 @@ def command_help(m):
 def command_lastNews(m):
     cid = m.chat.id
     bot.send_chat_action(cid, 'typing')
-    content = requests.get('http://10.0.9.31/DoCommand.aspx?fn=getLast&Code=-1&top=5').json()
-    for r in content:
-        data = r
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'])
+    lnews(cid)
 
 
 @bot.message_handler(commands=['inews'])
 def command_important_news(m):
     cid = m.chat.id
     bot.send_chat_action(cid, 'typing')
-    content = requests.get('http://10.0.9.31/DoCommand.aspx?fn=getPopular').json()
-    i = 0
-    for r in content:
-        if i == 3:
-            break
-        i += 1
-        data = r
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'])
-
+    inews(cid)
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def command_default(m):
