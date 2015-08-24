@@ -28,14 +28,12 @@ menuItem = [
     "lnews",
     "inews",
     "serviceTable"
-    "package"
 ]
 
 menuItemLbl = [
     "آخرین اخبار",
     "مهمترین اخبار",
-    "سرویس های برگزیده",
-    "بسته ها"
+    "سرویس های برگزیده"
 ]
 
 servicesCodeTable = [
@@ -117,36 +115,55 @@ def getMenuCode(t):
     else:
         return False
 
+def getLastFromService(cid,serviceCode):
+    url = getLast.replace("@code",serviceCode)
+    content = requests.get(url).json()
+    for r in content:
+        data = r
+        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'],disable_web_page_preview=True)
+
 def lnews(cid):
     url = getLast.replace("@code","-1")
     content = requests.get(url).json()
     for r in content:
         data = r
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'])
+        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'],disable_web_page_preview=True)
 
 def inews(cid):
     content = requests.get(getImportant).json()
     for r in content:
         data = r
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'])
+        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'],disable_web_page_preview=True)
 
 def showSubmenu(cid):
-    bot.send_message(cid, "لطفا سرویس مورد نظر خود را انتخاب نمایید", reply_markup=menuSelect)  #show the keyboard
+    bot.send_message(cid, "لطفا سرویس مورد نظر خود را انتخاب نمایید", reply_markup=subMenuSelect)  #show the keyboard
 
-@bot.message_handler(func=lambda message: True)
+@bot.message_handler(func=lambda message: (message.text in servicesNameTable))
+def msg_servicePackageSelect(m):
+    cid = m.chat.id
+    print("Submenu")
+    text = m.text
+    bot.send_chat_action(cid,'typing')
+    serviceCode =getServiceCode(m.text)
+    if serviceCode != False:
+        getLastFromService(cid,serviceCode)
+
+@bot.message_handler(func=lambda message: (message.text in menuItemLbl))
 def msg_menuSelect(m):
+    print("Main Menu")
     cid = m.chat.id
     text = m.text
-    bot.send_chat_action(cid,'typing')  #for some reason the 'upload_photo' status isn't quite working (doesn't show at all)
+    bot.send_chat_action(cid,'typing')
     menuCode =getMenuCode(m.text)
-    print(menuCode)
     if menuCode != False:
         if menuCode=="lnews":
             lnews(cid)
         elif menuCode=="inews":
             inews(cid)
-        elif menuCode=="serviceTable":
+        elif menuCode=="serviceTablepackage":
             showSubmenu(cid)
+
+
 
 @bot.message_handler(commands=['help'])
 def command_help(m):
@@ -156,6 +173,29 @@ def command_help(m):
         helpText += "/" + key + ": "
         helpText += commands[key] + "\n"
     bot.send_message(cid, helpText)
+
+@bot.message_handler(commands=['lnews'])
+def command_lastNews(m):
+    cid = m.chat.id
+    bot.send_chat_action(cid, 'typing')
+    content = requests.get('http://10.0.9.31/DoCommand.aspx?fn=getLast&Code=-1&top=5').json()
+    for r in content:
+        data = r
+        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'])
+
+
+@bot.message_handler(commands=['inews'])
+def command_important_news(m):
+    cid = m.chat.id
+    bot.send_chat_action(cid, 'typing')
+    content = requests.get('http://10.0.9.31/DoCommand.aspx?fn=getPopular').json()
+    i = 0
+    for r in content:
+        if i == 3:
+            break
+        i += 1
+        data = r
+        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'])
 
 
 def _decode_list(data):
@@ -183,31 +223,6 @@ def _decode_dict(data):
             value = value.encode('utf-8')
         rv[key] = value
     return rv
-
-
-@bot.message_handler(commands=['lnews'])
-def command_lastNews(m):
-    cid = m.chat.id
-    bot.send_chat_action(cid, 'typing')
-    content = requests.get('http://10.0.9.31/DoCommand.aspx?fn=getLast&Code=-1&top=5').json()
-    for r in content:
-        data = r
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'])
-
-
-@bot.message_handler(commands=['inews'])
-def command_important_news(m):
-    cid = m.chat.id
-    bot.send_chat_action(cid, 'typing')
-    content = requests.get('http://10.0.9.31/DoCommand.aspx?fn=getPopular').json()
-    i = 0
-    for r in content:
-        if i == 3:
-            break
-        i += 1
-        data = r
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + data['Url'])
-
 
 @bot.message_handler(func=lambda message: message.text == "hi")
 def command_textHi(m):
