@@ -37,20 +37,23 @@ menuItemLbl = [
 ]
 
 servicesCodeTable = [
-    "111",
-    "01-10-95",
-    "01-03-01-119",
+    "01-04-102",
+    "01-02-01-169",
     "01-06-91",
-    "112"
+    "01-03-01-119",
+    "112",
+    "-1"
 ]
 
 servicesNameTable = [
-    "خبر",
-    "دانش",
-    "اقتصاد",
+    "جامعه",
+    "سیاسی",
     "حوادث",
-    "ورزشی"
+    "اقتصادی",
+    "ورزشی",
+    "بازگشت"
 ]
+
 
 hideBoard = types.ReplyKeyboardHide()  # if sent as reply_markup, will hide the keyboard
 menuSelect = types.ReplyKeyboardMarkup(one_time_keyboard=True)  #create the image selection keyboard
@@ -146,7 +149,10 @@ def msg_servicePackageSelect(m):
     bot.send_chat_action(cid,'typing')
     serviceCode =getServiceCode(m.text)
     if serviceCode != False:
-        getLastFromService(cid,serviceCode)
+        if(serviceCode=="-1"):
+             bot.send_message(cid, "لطفا گزینه مورد نظر خود را انتخاب نمایید", reply_markup=menuSelect)
+        else:
+            getLastFromService(cid,serviceCode)
 
 @bot.message_handler(func=lambda message: (message.text in menuItemLbl))
 def msg_menuSelect(m):
