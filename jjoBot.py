@@ -155,6 +155,7 @@ def msg_menuSelect(m):
     text = m.text
     bot.send_chat_action(cid,'typing')
     menuCode =getMenuCode(m.text)
+    print(menuCode)
     if menuCode != False:
         if menuCode=="lnews":
             lnews(cid)
