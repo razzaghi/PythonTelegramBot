@@ -161,7 +161,7 @@ def msg_menuSelect(m):
             lnews(cid)
         elif menuCode=="inews":
             inews(cid)
-        elif menuCode=="serviceTablepackage":
+        elif menuCode=="serviceTable":
             showSubmenu(cid)
 
 @bot.message_handler(commands=['help'])
