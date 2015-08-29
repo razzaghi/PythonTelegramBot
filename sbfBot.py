@@ -19,7 +19,7 @@ class MyAdapter(HTTPAdapter):
                                        ssl_version=ssl.PROTOCOL_TLSv1)
 
 
-TOKEN = '93764156:AAFrZoe6Qe7gkX88AV_PqNqETO2NCXkk07Q'
+TOKEN = '98066991:AAGdW3DZMZukIBy4UxapfYQ4rexYkVmoeHM'
 
 commands = {
     'help': 'راهنمایی در مورد ',
