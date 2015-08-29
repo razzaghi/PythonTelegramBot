@@ -114,7 +114,7 @@ def command_image(m):
 def callAPi(url):
     s = requests.Session()
     s.mount('https://', MyAdapter())
-    return requests.get(url).json()
+    return s.get(url).json()
 
 
 def getServiceCode(t):

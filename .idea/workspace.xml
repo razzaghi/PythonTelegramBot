@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1a6b3e4-fa83-4d52-8e26-e2145162ce4e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testRest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Readme" afterPath="$PROJECT_DIR$/Readme" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jjoBot.py" afterPath="$PROJECT_DIR$/jjoBot.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -34,8 +32,8 @@
       <file leaf-file-name="jjoBot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jjoBot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6304348">
-              <caret line="304" column="0" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.80100334">
+              <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
               <folding>
                 <element signature="e#47#61#0" expanded="true" />
               </folding>
@@ -598,7 +596,13 @@
       <option name="project" value="LOCAL" />
       <updated>1440428896681</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add ssl handler">
+      <created>1440834824686</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1440834824686</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -642,7 +646,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add Menu" />
     <MESSAGE value="First Version" />
-    <option name="LAST_COMMIT_MESSAGE" value="First Version" />
+    <MESSAGE value="Add ssl handler" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add ssl handler" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -729,8 +734,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/jjoBot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6304348">
-          <caret line="304" column="0" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.80100334">
+          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
           <folding>
             <element signature="e#47#61#0" expanded="true" />
           </folding>
