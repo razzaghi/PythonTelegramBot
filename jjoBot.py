@@ -309,7 +309,7 @@ def command_default(m):
 
 while True:
     try:
-        time.sleep(1)
+        time.sleep(1000)
     except Exception as inst:
         print(type(inst))     # the exception instance
         print(inst.args)      # arguments stored in .args
