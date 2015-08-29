@@ -65,12 +65,15 @@ for name in servicesNameTable:
     subMenuSelect.add(name)
 
 def listener(messages):
-    for m in messages:
-        cid = m.chat.id
-        print(m)
-        if m.content_type == 'text':
-            print("[" + str(m.chat.id) + "]: " + m.text)
-
+    try:
+        for m in messages:
+            cid = m.chat.id
+            if m.content_type == 'text':
+                print("[" + str(cid) + "]: " + m.text)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
 
 bot = telebot.TeleBot(TOKEN)
 bot.set_update_listener(listener)  #register listener
@@ -82,129 +85,210 @@ except Exception:
 
 @bot.message_handler(commands=['start'])
 def command_start(m):
-    cid = m.chat.id
-    bot.send_message(cid, "سلام خوش اومدی، امیدوارم بتونم بهترین اخبار رو در اختیارت بذارم")
+    try:
+        cid = m.chat.id
+        bot.send_message(cid, "سلام خوش اومدی، امیدوارم بتونم بهترین اخبار رو در اختیارت بذارم")
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
 
 
 @bot.message_handler(commands=['menu'])
 def command_image(m):
     cid = m.chat.id
-    bot.send_message(cid, "لطفا گزینه مورد نظر خود را انتخاب نمایید", reply_markup=menuSelect)  #show the keyboard
+    sendCommandForMenu(cid, "لطفا گزینه مورد نظر خود را انتخاب نمایید", reply_markup=menuSelect)  #show the keyboard
 
 def getServiceCode(t):
-    flag = False
-    i = 0
-    for name in servicesNameTable:
-        if name == t:
-            flag = True
-            break
-        i += 1
-    if flag:
-        return servicesCodeTable[i]
-    else:
-        return False
+    try:
+        flag = False
+        i = 0
+        for name in servicesNameTable:
+            if name == t:
+                flag = True
+                break
+            i += 1
+        if flag:
+            return servicesCodeTable[i]
+        else:
+            return False
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
 
 def getMenuCode(t):
-    flag = False
-    i = 0
-    for name in menuItemLbl:
-        if name == t:
-            flag = True
-            break
-        i += 1
-    if flag:
-        return menuItem[i]
-    else:
-        return False
+    try:
+        flag = False
+        i = 0
+        for name in menuItemLbl:
+            if name == t:
+                flag = True
+                break
+            i += 1
+        if flag:
+            return menuItem[i]
+        else:
+            return False
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
+
 
 def getLastFromService(cid,serviceCode):
-    url = getLast.replace("@code",serviceCode)
-    content = requests.get(url).json()
-    for r in content:
-        data = r
-        url = data['Url'].replace("www.jamejamonline","jjo")
-        url = url.replace("jamejamonline","jjo")
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
+    try:
+        url = getLast.replace("@code",serviceCode)
+        content = requests.get(url).json()
+        for r in content:
+            data = r
+            url = data['Url'].replace("www.jamejamonline","jjo")
+            url = url.replace("jamejamonline","jjo")
+            sendText(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
+
+def sendText(cid,text):
+    try:
+        bot.send_message(cid, "@jjoBot \r\n"+text,disable_web_page_preview=True)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
+
+def sendCommandForMenu(cid,text,reply_markup):
+    try:
+        bot.send_message(cid, "@jjoBot \r\n"+text,reply_markup=reply_markup)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
+
 
 def lnews(cid):
-    url = getLast.replace("@code","-1")
-    content = requests.get(url).json()
-    for r in content:
-        data = r
-        url = data['Url'].replace("www.jamejamonline","jjo")
-        url = url.replace("jamejamonline","jjo")
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
+    try:
+        url = getLast.replace("@code","-1")
+        content = requests.get(url).json()
+        for r in content:
+            data = r
+            url = data['Url'].replace("www.jamejamonline","jjo")
+            url = url.replace("jamejamonline","jjo")
+            sendText(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
 
 def inews(cid):
-    content = requests.get(getImportant).json()
-    for r in content:
-        data = r
-        url = data['Url'].replace("www.jamejamonline","jjo")
-        url = url.replace("jamejamonline","jjo")
-        bot.send_message(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url,disable_web_page_preview=True)
+    try:
+        content = requests.get(getImportant).json()
+        for r in content:
+            data = r
+            url = data['Url'].replace("www.jamejamonline","jjo")
+            url = url.replace("jamejamonline","jjo")
+            sendText(cid, "http://JJO.Ir \r\n" + data['Title'] + "\r\n" + url)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
 
 def showSubmenu(cid):
-    bot.send_message(cid, "لطفا سرویس مورد نظر خود را انتخاب نمایید", reply_markup=subMenuSelect)  #show the keyboard
+    sendCommandForMenu(cid, "لطفا سرویس مورد نظر خود را انتخاب نمایید", reply_markup=subMenuSelect)  #show the keyboard
 
 @bot.message_handler(func=lambda message: (message.text in servicesNameTable))
 def msg_servicePackageSelect(m):
-    cid = m.chat.id
-    print("Submenu")
-    text = m.text
-    bot.send_chat_action(cid,'typing')
-    serviceCode =getServiceCode(m.text)
-    if serviceCode != False:
-        if(serviceCode=="-1"):
-             bot.send_message(cid, "لطفا گزینه مورد نظر خود را انتخاب نمایید", reply_markup=menuSelect)
-        else:
-            getLastFromService(cid,serviceCode)
+    try:
+        cid = m.chat.id
+        print("Submenu")
+        text = m.text
+        bot.send_chat_action(cid,'typing')
+        serviceCode =getServiceCode(m.text)
+        if serviceCode != False:
+            if(serviceCode=="-1"):
+                 sendCommandForMenu(cid, "لطفا گزینه مورد نظر خود را انتخاب نمایید", reply_markup=menuSelect)
+            else:
+                getLastFromService(cid,serviceCode)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
 
 @bot.message_handler(func=lambda message: (message.text in menuItemLbl))
 def msg_menuSelect(m):
-    print("Main Menu")
-    cid = m.chat.id
-    text = m.text
-    bot.send_chat_action(cid,'typing')
-    menuCode =getMenuCode(m.text)
-    print(menuCode)
-    if menuCode != False:
-        if menuCode=="lnews":
-            lnews(cid)
-        elif menuCode=="inews":
-            inews(cid)
-        elif menuCode=="serviceTable":
-            showSubmenu(cid)
+    try:
+        print("Main Menu")
+        cid = m.chat.id
+        text = m.text
+        bot.send_chat_action(cid,'typing')
+        menuCode =getMenuCode(m.text)
+        print(menuCode)
+        if menuCode != False:
+            if menuCode=="lnews":
+                lnews(cid)
+            elif menuCode=="inews":
+                inews(cid)
+            elif menuCode=="serviceTable":
+                showSubmenu(cid)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
 
 @bot.message_handler(commands=['help'])
 def command_help(m):
-    cid = m.chat.id
-    helpText = "دستورات زیر موجود است : \n"
-    for key in commands:
-        helpText += "/" + key + ": "
-        helpText += commands[key] + "\n"
-    bot.send_message(cid, helpText)
+    try:
+        cid = m.chat.id
+        helpText = "دستورات زیر موجود است : \n"
+        for key in commands:
+            helpText += "/" + key + ": "
+            helpText += commands[key] + "\n"
+        sendText(cid, helpText)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
 
 @bot.message_handler(commands=['lnews'])
 def command_lastNews(m):
-    cid = m.chat.id
-    bot.send_chat_action(cid, 'typing')
-    lnews(cid)
+    try:
+        cid = m.chat.id
+        bot.send_chat_action(cid, 'typing')
+        lnews(cid)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
 
 
 @bot.message_handler(commands=['inews'])
 def command_important_news(m):
-    cid = m.chat.id
-    bot.send_chat_action(cid, 'typing')
-    inews(cid)
+    try:
+        cid = m.chat.id
+        bot.send_chat_action(cid, 'typing')
+        inews(cid)
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def command_default(m):
-    bot.send_message(m.chat.id,
+    try:
+        sendText(m.chat.id,
                      "Iدستور وارد شده صحیح نمی باشد برای راهنمایی  از این دستور ا ستفاده کنید \r\n /help")
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
+
 
 
 while True:
     try:
         time.sleep(1)
-    except KeyboardInterrupt:
-        break
+    except Exception as inst:
+        print(type(inst))     # the exception instance
+        print(inst.args)      # arguments stored in .args
+        print(inst)           # __str__ allows args to be printed directly
