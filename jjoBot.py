@@ -7,6 +7,18 @@ import requests
 from telebot import types
 import time
 
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.poolmanager import PoolManager
+import ssl
+
+class MyAdapter(HTTPAdapter):
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = PoolManager(num_pools=connections,
+                                       maxsize=maxsize,
+                                       block=block,
+                                       ssl_version=ssl.PROTOCOL_TLSv1)
+
+
 TOKEN = '93764156:AAFrZoe6Qe7gkX88AV_PqNqETO2NCXkk07Q'
 
 commands = {
@@ -99,6 +111,12 @@ def command_image(m):
     cid = m.chat.id
     sendCommandForMenu(cid, "لطفا گزینه مورد نظر خود را انتخاب نمایید", reply_markup=menuSelect)  #show the keyboard
 
+def callAPi(url):
+    s = requests.Session()
+    s.mount('https://', MyAdapter())
+    return requests.get(url).json()
+
+
 def getServiceCode(t):
     try:
         flag = False
@@ -139,7 +157,7 @@ def getMenuCode(t):
 def getLastFromService(cid,serviceCode):
     try:
         url = getLast.replace("@code",serviceCode)
-        content = requests.get(url).json()
+        content = callAPi(url)
         for r in content:
             data = r
             url = data['Url'].replace("www.jamejamonline","jjo")
@@ -170,7 +188,7 @@ def sendCommandForMenu(cid,text,reply_markup):
 def lnews(cid):
     try:
         url = getLast.replace("@code","-1")
-        content = requests.get(url).json()
+        content = callAPi(url)
         for r in content:
             data = r
             url = data['Url'].replace("www.jamejamonline","jjo")
@@ -183,7 +201,7 @@ def lnews(cid):
 
 def inews(cid):
     try:
-        content = requests.get(getImportant).json()
+        content = callAPi(getImportant)
         for r in content:
             data = r
             url = data['Url'].replace("www.jamejamonline","jjo")
