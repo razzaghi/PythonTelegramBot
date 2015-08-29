@@ -18,6 +18,12 @@ class MyAdapter(HTTPAdapter):
                                        block=block,
                                        ssl_version=ssl.PROTOCOL_TLSv1)
 
+def callAPi(url):
+    s = requests.Session()
+    s.mount('https://', MyAdapter())
+    s.mount('http://', MyAdapter())
+    return s.get(url).json()
+
 
 TOKEN = '93764156:AAFrZoe6Qe7gkX88AV_PqNqETO2NCXkk07Q'
 
@@ -111,10 +117,6 @@ def command_image(m):
     cid = m.chat.id
     sendCommandForMenu(cid, "لطفا گزینه مورد نظر خود را انتخاب نمایید", reply_markup=menuSelect)  #show the keyboard
 
-def callAPi(url):
-    s = requests.Session()
-    s.mount('https://', MyAdapter())
-    return s.get(url).json()
 
 
 def getServiceCode(t):
